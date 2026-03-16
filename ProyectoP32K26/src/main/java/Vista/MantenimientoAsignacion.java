@@ -219,7 +219,7 @@ public class MantenimientoAsignacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnregistrarActionPerformed
 
-<<<<<<< HEAD
+
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
 
         cbxusuario.setSelectedIndex(0);
@@ -228,7 +228,7 @@ public class MantenimientoAsignacion extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnlimpiarActionPerformed
-=======
+
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
           //if (txtbuscado.getText().trim().isEmpty()) {
@@ -237,7 +237,7 @@ public class MantenimientoAsignacion extends javax.swing.JFrame {
     //}
     //buscarAsignacion();
     }//GEN-LAST:event_btnbuscarActionPerformed
->>>>>>> ActualizarBotonBuscaryEliminar
+
 
     /**
      * @param args the command line arguments
