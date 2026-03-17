@@ -11,9 +11,10 @@ import java.util.List;
 
 public class AsignacionPerfilUsuarioDAO {
 
-    //modifique esto para que me cuadrara por que siempre lo escribo mal jejej
+    // Consultas SQL actualizadas a los nombres de tu base de datos
     private static final String SQL_SELECT = "SELECT Usucodigo, Percodigo FROM asignacionperfilusuario";
     private static final String SQL_INSERT = "INSERT INTO asignacionperfilusuario(Usucodigo, Percodigo) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE asignacionperfilusuario SET Percodigo=? WHERE Usucodigo=?";
     private static final String SQL_DELETE = "DELETE FROM asignacionperfilusuario WHERE Usucodigo=? AND Percodigo=?";
 
     public List<AsignacionPerfilUsuario> select() {
@@ -27,7 +28,7 @@ public class AsignacionPerfilUsuarioDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 AsignacionPerfilUsuario asig = new AsignacionPerfilUsuario();
-                //aqui se guarda como en una cajita el objeto
+                // aqui se guarda como en una cajita el objeto
                 asig.setUsucodigo(rs.getInt("Usucodigo"));
                 asig.setPercodigo(rs.getInt("Percodigo"));
                 lista.add(asig);
@@ -49,6 +50,47 @@ public class AsignacionPerfilUsuarioDAO {
         try {
             conn = Conexion.getConnection();//para poder insertarloos
             stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setInt(1, asig.getUsucodigo());
+            stmt.setInt(2, asig.getPercodigo());
+            rows = stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return rows;
+    }
+
+    // Nuevo método para actualizar
+    public int update(AsignacionPerfilUsuario asig) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            // Primero el nuevo Percodigo, luego el Usucodigo que sirve de filtro
+            stmt.setInt(1, asig.getPercodigo());
+            stmt.setInt(2, asig.getUsucodigo());
+            rows = stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return rows;
+    }
+
+    // Método para borrar
+    public int delete(AsignacionPerfilUsuario asig) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, asig.getUsucodigo());
             stmt.setInt(2, asig.getPercodigo());
             rows = stmt.executeUpdate();
